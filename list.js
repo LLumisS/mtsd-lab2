@@ -193,7 +193,13 @@ class List {
     this.listLength = 0;
   }
 
-  extend() {}
+  extend(list) {
+    let current = list.head;
+    while(current) {
+      this.append(current.value);
+      current = current.next;
+    }
+  }
 
   getAll() {
     let current = this.head;

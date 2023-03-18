@@ -101,6 +101,14 @@ test('find last test', () => {
   expect(list.findFirst('2')).toBe(-1);
 });
 
+//EXTEND
+test('clear test', () => {
+  const newList = new List();
+  for(let i = 0; i < 5; i++) newList.append(i.toString());
+  list.extend(newList);
+  expect(list.getAll()).toBe('1 b a b 0 1 2 3 4');
+});
+
 //CLEAR
 test('clear test', () => {
   list.clear();
