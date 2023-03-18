@@ -64,7 +64,31 @@ class List {
     this.listLength++;
   }
 
-  delete() {}
+  delete(index) {
+    if(index < 0 || index > this.listLength)
+      throw new Error('Invalid index');
+
+    let current = this.head;
+    let prev = null;
+    let currentIndex = 0;
+
+    while (currentIndex < index) {
+      prev = current;
+      current = current.next;
+      currentIndex++;
+    }
+
+    if (prev) prev.next = current.next;
+    else this.head = current.next;
+
+    if (current.next) current.next.prev = prev;
+    else this.tail = prev;
+
+    current.prev = null;
+    current.next = null;
+    
+    this.length--;
+  }
 
   deleteAll() {}
 

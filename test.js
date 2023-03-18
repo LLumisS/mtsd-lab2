@@ -5,7 +5,7 @@ const { List } = require('./list.js');
 
 const list = new List();
 
-//appent method test
+//APPENT
 test('append test', () => {
   try {
     list.appent(1);
@@ -24,7 +24,7 @@ test('append test', () => {
   expect(list.getAll()).toBe('a b');
 });
 
-//insert test
+//INSERT
 test('insert test', () => {
   try {
     list.insert(1, 2);
@@ -44,4 +44,14 @@ test('insert test', () => {
   expect(list.getAll()).toBe('a b 2 1');
 });
 
-console.log(list);
+//DELETE
+test('insert test', () => {
+  try {
+    list.delete(10);
+  } catch (error) {
+    expect(error.message).toBe('Invalid index');
+  }
+
+  list.delete(2);
+  expect(list.getAll()).toBe('a b 1');
+});
