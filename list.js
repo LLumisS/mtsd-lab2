@@ -88,6 +88,8 @@ class List {
     current.next = null;
     
     this.length--;
+
+    return current.value;
   }
 
   deleteAll(element) {
