@@ -136,12 +136,10 @@ class List {
 
     let current = this.head;
 
-    for (let i = 0; i < this.listLength; i++) {
-      if (current) {
-        element = new Element(current.value);
-        list.append(element.value);
-        current = current.next;
-      }
+    while (current) {
+      element = new Element(current.value);
+      list.append(element.value);
+      current = current.next;
     }
 
     return list;
