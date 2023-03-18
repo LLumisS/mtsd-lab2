@@ -115,7 +115,20 @@ class List {
     }
   }
 
-  get() {}
+  get(index) {
+    if(index < 0 || index > this.listLength)
+      throw new Error('Invalid index');
+
+    let current = this.head;
+    let currentIndex = 0;
+
+    while (currentIndex < index) {
+      current = current.next;
+      currentIndex++;
+    }
+
+    return current.value;
+  }
 
   clone() {}
 

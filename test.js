@@ -62,3 +62,10 @@ test('delete all test', () => {
   list.deleteAll('a');
   expect(list.getAll()).toBe('b 1');
 });
+
+//GET
+test('get test', () => {
+  list.insert('a', 0);
+
+  expect(list.get(1)).toBe('b');
+});
