@@ -5,22 +5,22 @@ const { List } = require('./list.js');
 
 const list = new List();
 
-//APPENT
+//APPEND
 test('append test', () => {
   try {
-    list.appent(1);
+    list.append(1);
   } catch (error) {
     expect(error.message).toBe('Invalid value');
   }
 
   try {
-    list.appent('12');
+    list.append('12');
   } catch (error) {
     expect(error.message).toBe('Invalid value');
   }
-  list.appent('a');
+  list.append('a');
   expect(list.getAll()).toBe('a');
-  list.appent('b');
+  list.append('b');
   expect(list.getAll()).toBe('a b');
 });
 
@@ -45,7 +45,7 @@ test('insert test', () => {
 });
 
 //DELETE
-test('insert test', () => {
+test('delete test', () => {
   try {
     list.delete(10);
   } catch (error) {
@@ -57,7 +57,7 @@ test('insert test', () => {
 
 //DELETE ALL
 test('delete all test', () => {
-  list.appent('a');
+  list.append('a');
 
   list.deleteAll('a');
   expect(list.getAll()).toBe('b 1');
@@ -68,4 +68,14 @@ test('get test', () => {
   list.insert('a', 0);
 
   expect(list.get(1)).toBe('b');
+});
+
+//CLONE
+test('clone test', () => {
+  expect(list.clone().getAll()).toBe('a b 1');
+});
+
+//LENGTH
+test('append test', () => {
+  expect(list.length()).toBe(3);
 });

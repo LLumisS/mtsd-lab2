@@ -21,7 +21,7 @@ class List {
     return this.listLength;
   }
 
-  appent(element) {
+  append(element) {
     const value = new Element(element);
 
     if(this.listLength !== 0) {
@@ -87,7 +87,7 @@ class List {
     current.prev = null;
     current.next = null;
     
-    this.length--;
+    this.listLength--;
 
     return current.value;
   }
@@ -130,7 +130,22 @@ class List {
     return current.value;
   }
 
-  clone() {}
+  clone() {
+    const list = new List();
+    let element = null;
+
+    let current = this.head;
+
+    for (let i = 0; i < this.listLength; i++) {
+      if (current) {
+        element = new Element(current.value);
+        list.append(element.value);
+        current = current.next;
+      }
+    }
+
+    return list;
+  }
 
   reverse () {}
 
