@@ -100,3 +100,10 @@ test('find last test', () => {
   expect(list.findLast('a')).toBe(2);
   expect(list.findFirst('2')).toBe(-1);
 });
+
+//CLEAR
+test('clear test', () => {
+  list.clear();
+  expect(list.getAll()).toBe('');
+  expect(list.length()).toBe(0);
+});

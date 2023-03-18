@@ -187,7 +187,11 @@ class List {
     return -1;
   }
 
-  clear() {}
+  clear() {
+    this.head = null;
+    this.tail = null;
+    this.listLength = 0;
+  }
 
   extend() {}
 
