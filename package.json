@@ -1,0 +1,22 @@
+{
+  "name": "lab2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLumisS/mtsd-lab2.git"
+  },
+  "author": "Kyrylo LLumisS Bukach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LLumisS/mtsd-lab2/issues"
+  },
+  "homepage": "https://github.com/LLumisS/mtsd-lab2#readme",
+  "devDependencies": {
+    "eslint": "^8.36.0"
+  }
+}
