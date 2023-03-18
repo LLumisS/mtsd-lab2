@@ -36,7 +36,33 @@ class List {
     this.listLength++;
   }
 
-  insert() {}
+  insert(element, index) {
+    if(index < 0 || index > this.listLength)
+      throw new Error('Invalid index');
+
+    const value = new Element(element);
+
+    let next = this.head;
+    let prev = null;
+    let currentIndex = 0;
+
+    while (currentIndex < index) {
+      prev = next;
+      next = next.next;
+      currentIndex++;
+    }
+
+    value.prev = prev;
+    value.next = next;
+
+    if(prev) prev.next = value;
+    else this.head = value;
+
+    if(next) next.prev = value;
+    else this.tail = value;
+
+    this.listLength++;
+  }
 
   delete() {}
 

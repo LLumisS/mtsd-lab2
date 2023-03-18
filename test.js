@@ -24,4 +24,24 @@ test('append test', () => {
   expect(list.getAll()).toBe('a b');
 });
 
+//insert test
+test('insert test', () => {
+  try {
+    list.insert(1, 2);
+  } catch (error) {
+    expect(error.message).toBe('Invalid value');
+  }
+
+  try {
+    list.insert(1, 10);
+  } catch (error) {
+    expect(error.message).toBe('Invalid index');
+  }
+
+  list.insert('1', 2);
+  expect(list.getAll()).toBe('a b 1');
+  list.insert('2', 2);
+  expect(list.getAll()).toBe('a b 2 1');
+});
+
 console.log(list);
