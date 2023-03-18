@@ -112,6 +112,6 @@ test('clear test', () => {
 //CLEAR
 test('clear test', () => {
   list.clear();
-  expect(list.getAll()).toBe('  ');
+  expect(list.getAll()).toBe('');
   expect(list.length()).toBe(0);
 });
