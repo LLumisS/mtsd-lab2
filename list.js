@@ -147,7 +147,21 @@ class List {
     return list;
   }
 
-  reverse () {}
+  reverse () {
+    let right = this.tail;
+    let left = this.head;
+    let temp = null;
+
+    for (let i = 0; i < this.listLength / 2; i++) {
+      temp = right.value;
+
+      right.value = left.value;
+      left.value = temp;
+
+      right = right.prev;
+      left = left.next;
+    }
+  }
 
   findFirst() {}
 

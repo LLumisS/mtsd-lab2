@@ -79,3 +79,9 @@ test('clone test', () => {
 test('append test', () => {
   expect(list.length()).toBe(3);
 });
+
+//REVERSE
+test('reverse test', () => {
+  list.reverse();
+  expect(list.getAll()).toBe('1 b a');
+});
