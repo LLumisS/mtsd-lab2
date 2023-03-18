@@ -161,9 +161,31 @@ class List {
     }
   }
 
-  findFirst() {}
+  findFirst(element) {
+    let current = this.head;
+    let currentIndex = 0;
 
-  findLast() {}
+    while(current) {
+      if(current.value === element) return currentIndex;
+      current = current.next;
+      currentIndex++;
+    }
+
+    return -1;
+  }
+
+  findLast(element) {
+    let current = this.tail;
+    let currentIndex = this.listLength - 1;
+
+    while(current) {
+      if(current.value === element) return currentIndex;
+      current = current.prev;
+      currentIndex--;
+    }
+
+    return -1;
+  }
 
   clear() {}
 

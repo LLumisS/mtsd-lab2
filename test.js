@@ -85,3 +85,18 @@ test('reverse test', () => {
   list.reverse();
   expect(list.getAll()).toBe('1 b a');
 });
+
+//FIND FIRST
+test('find first test', () => {
+  list.append('b');
+  expect(list.findFirst('b')).toBe(1);
+  expect(list.findFirst('a')).toBe(2);
+  expect(list.findFirst('2')).toBe(-1);
+});
+
+//FIND LAST
+test('find last test', () => {
+  expect(list.findLast('b')).toBe(3);
+  expect(list.findLast('a')).toBe(2);
+  expect(list.findFirst('2')).toBe(-1);
+});
