@@ -2,7 +2,8 @@
 
 class Element {
   constructor(value) {
-    if (typeof value === 'string' && value.length) throw 'invalid value';
+    if (typeof value !== 'string' || value.length !== 1) 
+      throw new Error('Invalid value');
     this.next = null;
     this.prev = null;
     this.value = value;
@@ -54,6 +55,18 @@ class List {
   clear() {}
 
   extend() {}
+
+  getAll() {
+    let current = this.head;
+    let result = '';
+
+    while(current) {
+      result += current.value + ' ';
+      current = current.next;
+    }
+
+    return result.slice(0, -1);
+  }
 }
 
 exports.List = List;
