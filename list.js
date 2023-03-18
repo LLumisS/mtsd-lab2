@@ -90,7 +90,28 @@ class List {
     this.length--;
   }
 
-  deleteAll() {}
+  deleteAll(element) {
+    let prev = null;
+    let current = this.head;
+    let next = current.next;
+
+    while (current) {
+      if(current.value === element) {
+        if (prev) prev.next = next;
+        else this.head = next;
+        if (next) next.prev = prev;
+        else this.tail = prev;
+
+        current.prev = null;
+        current.next = null;
+        
+        this.listLength--;
+      } 
+      prev = current;
+      current = next;
+      if(next) next = next.next;
+    }
+  }
 
   get() {}
 
