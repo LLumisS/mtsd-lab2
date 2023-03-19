@@ -19,9 +19,9 @@ test('append test', () => {
     expect(error.message).toBe('Invalid value');
   }
   list.append('a');
-  expect(list.getAll()).toBe('a');
+  expect(list.getAll()).toStrictEqual(['a']);
   list.append('b');
-  expect(list.getAll()).toBe('a b');
+  expect(list.getAll()).toStrictEqual(['a', 'b']);
 });
 
 //INSERT
@@ -39,9 +39,9 @@ test('insert test', () => {
   }
 
   list.insert('1', 2);
-  expect(list.getAll()).toBe('a b 1');
+  expect(list.getAll()).toStrictEqual(['a', 'b', '1']);
   list.insert('2', 2);
-  expect(list.getAll()).toBe('a b 2 1');
+  expect(list.getAll()).toStrictEqual(['a', 'b', '2', '1']);
 });
 
 //DELETE
@@ -60,30 +60,30 @@ test('delete all test', () => {
   list.append('a');
 
   list.deleteAll('a');
-  expect(list.getAll()).toBe('b 1');
+  expect(list.getAll()).toStrictEqual(['b', '1']);
 });
 
 //GET
 test('get test', () => {
   list.insert('a', 0);
 
-  expect(list.get(1)).toBe('b');
+  expect(list.get(1)).toStrictEqual('b');
 });
 
 //CLONE
 test('clone test', () => {
-  expect(list.clone().getAll()).toBe('a b 1');
+  expect(list.clone().getAll()).toStrictEqual(['a', 'b', '1']);
 });
 
 //LENGTH
-test('append test', () => {
+test('length test', () => {
   expect(list.length()).toBe(3);
 });
 
 //REVERSE
 test('reverse test', () => {
   list.reverse();
-  expect(list.getAll()).toBe('1 b a');
+  expect(list.getAll()).toStrictEqual(['1', 'b', 'a']);
 });
 
 //FIND FIRST
@@ -102,16 +102,16 @@ test('find last test', () => {
 });
 
 //EXTEND
-test('clear test', () => {
+test('extend test', () => {
   const newList = new List();
   for(let i = 0; i < 5; i++) newList.append(i.toString());
   list.extend(newList);
-  expect(list.getAll()).toBe('1 b a b 0 1 2 3 4');
+  expect(list.getAll()).toStrictEqual(['1', 'b', 'a', 'b', '0', '1', '2', '3', '4']);
 });
 
 //CLEAR
 test('clear test', () => {
   list.clear();
-  expect(list.getAll()).toBe('');
+  expect(list.getAll()).toStrictEqual([]);
   expect(list.length()).toBe(0);
 });

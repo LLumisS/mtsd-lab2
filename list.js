@@ -1,217 +1,101 @@
 'use strict';
 
-class Element {
-  constructor(value) {
-    if (typeof value !== 'string' || value.length !== 1) 
-      throw new Error('Invalid value');
-    this.next = null;
-    this.prev = null;
-    this.value = value;
-  }
-}
-
 class List {
   constructor() {
-    this.head = null;
-    this.tail = null;
-    this.listLength = 0;
+    this.array = [];
+  }
+
+  checkElement(element) {
+    if (typeof element !== 'string' || element.length !== 1) 
+      throw new Error('Invalid value');
+  }
+  checkIndex(index) {
+    if(index < 0 || index > this.length())
+      throw new Error('Invalid index');
   }
 
   length() {
-    return this.listLength;
+    return this.array.length;
   }
 
   append(element) {
-    const value = new Element(element);
+    this.checkElement(element);
 
-    if(this.listLength !== 0) {
-      value.prev = this.tail;
-      this.tail.next = value;
-      this.tail = value;
-    } else {
-      this.head = value;
-      this.tail = value;
-    }
-
-    this.listLength++;
+    this.array.push(element);
   }
 
   insert(element, index) {
-    if(index < 0 || index > this.listLength)
-      throw new Error('Invalid index');
+    this.checkIndex(index);
+    this.checkElement(element);
 
-    const value = new Element(element);
-
-    let next = this.head;
-    let prev = null;
-    let currentIndex = 0;
-
-    while (currentIndex < index) {
-      prev = next;
-      next = next.next;
-      currentIndex++;
-    }
-
-    value.prev = prev;
-    value.next = next;
-
-    if(prev) prev.next = value;
-    else this.head = value;
-
-    if(next) next.prev = value;
-    else this.tail = value;
-
-    this.listLength++;
+    this.array.splice(index, 0, element);
   }
 
   delete(index) {
-    if(index < 0 || index > this.listLength)
-      throw new Error('Invalid index');
+    this.checkIndex(index);
 
-    let current = this.head;
-    let prev = null;
-    let currentIndex = 0;
-
-    while (currentIndex < index) {
-      prev = current;
-      current = current.next;
-      currentIndex++;
-    }
-
-    if (prev) prev.next = current.next;
-    else this.head = current.next;
-
-    if (current.next) current.next.prev = prev;
-    else this.tail = prev;
-
-    current.prev = null;
-    current.next = null;
-    
-    this.listLength--;
-
-    return current.value;
+    let result = this.array[index];
+    this.array.splice(index, 1);
+    return result;
   }
 
   deleteAll(element) {
-    let prev = null;
-    let current = this.head;
-    let next = current.next;
-
-    while (current) {
-      if(current.value === element) {
-        if (prev) prev.next = next;
-        else this.head = next;
-        if (next) next.prev = prev;
-        else this.tail = prev;
-
-        current.prev = null;
-        current.next = null;
-        
-        this.listLength--;
-      } 
-      prev = current;
-      current = next;
-      if(next) next = next.next;
-    }
+    this.array = this.array.filter(value => value !== element);
   }
 
   get(index) {
-    if(index < 0 || index > this.listLength)
-      throw new Error('Invalid index');
+    this.checkIndex(index);
 
-    let current = this.head;
-    let currentIndex = 0;
-
-    while (currentIndex < index) {
-      current = current.next;
-      currentIndex++;
-    }
-
-    return current.value;
+    return this.array[index];
   }
 
   clone() {
     const list = new List();
-    let element = null;
 
-    let current = this.head;
-
-    while (current) {
-      element = new Element(current.value);
-      list.append(element.value);
-      current = current.next;
+    for (let i = 0; i < this.length(); i++) {
+      list.append(this.array[i]);
     }
 
     return list;
   }
 
   reverse () {
-    let right = this.tail;
-    let left = this.head;
     let temp = null;
+    for (let i = 0; i < this.length() / 2; i++) {
+      temp = this.array[i];
 
-    for (let i = 0; i < this.listLength / 2; i++) {
-      temp = right.value;
-
-      right.value = left.value;
-      left.value = temp;
-
-      right = right.prev;
-      left = left.next;
+      this.array[i] = this.array[this.length() - 1 - i];
+      this.array[this.length() - 1 - i] = temp;
     }
   }
 
   findFirst(element) {
-    let current = this.head;
-    let currentIndex = 0;
-
-    while(current) {
-      if(current.value === element) return currentIndex;
-      current = current.next;
-      currentIndex++;
+    for (let i = 0; i < this.length(); i++) {
+      if (this.array[i] === element) return i;
     }
-
     return -1;
   }
 
   findLast(element) {
-    let current = this.tail;
-    let currentIndex = this.listLength - 1;
-
-    while(current) {
-      if(current.value === element) return currentIndex;
-      current = current.prev;
-      currentIndex--;
+    for (let i = this.length() - 1; i > -1; i--) {
+      if (this.array[i] === element) return i;
     }
-
     return -1;
   }
 
   clear() {
-    this.head = null;
-    this.tail = null;
-    this.listLength = 0;
+    this.array.length = 0;
   }
 
   extend(list) {
-    let current = list.head;
-    while(current) {
-      this.append(current.value);
-      current = current.next;
+    for (let i = 0; i < list.length(); i++) {
+      this.array.push(list.array[i]);
     }
   }
 
   getAll() {
-    let current = this.head;
-    let result = '';
-
-    while(current) {
-      result += current.value + ' ';
-      current = current.next;
-    }
-
-    return result.slice(0, -1);
-  }
+    return this.array;
+  } 
 }
 
 exports.List = List;
